@@ -6,7 +6,7 @@
 	<h1>welcome to class!</h1>
 	<h1>good morning</h1>
 	<h1>sunny day</h1>
-	<h1>sunday</h1>
+	<h1>weekend</h1>
 	<p>
 		It is now
 		<%= new java.util.Date() %></p>
