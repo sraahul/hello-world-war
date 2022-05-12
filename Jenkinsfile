@@ -1,21 +1,34 @@
 pipeline{
-	agent { label 'group2' }
-   stages{
-     stage('checkout'){
-       steps{
-      	sh'git pull https://github.com/manojugowda/hello-world-war.git'
-	}
+      agent any
+      stages{
+      stage('check out'){
+                  steps{
+                  sh "rm -rf hello-world-war"
+                  sh "git clone https://github.com/sraahul/hello-world-war"
+                  }
+                  }
+      stage('build'){
+      steps{
+      sh "pwd"
+      sh "ls"
+      sh "cd hello-world-war"
+      sh "docker build -t sraahul/file:1.0 ."
       }
-	   stage('build'){
-        steps{
-	sh'mvn clean package'
-    }
-   }
-
-	   	   stage('copy'){
-        steps{
-	sh'cp -R /home/slave-3/jenkins/workspace/package/target/hello-world-war-1.0.0 /opt/apache-tomcat-9.0.56/webapps'
-    }
-   }
-  }
- }
+      }
+       stage('publish'){
+                  steps{
+                        sh "docker login -u shashankvirat -p Virat@123"
+                        sh "docker push sraahul/file:1.0"
+                  }
+            }
+            stage('deploy'){
+                  agent { label 'tomcat' }
+                  steps{
+                        sh "docker login -u shashankvirat -p Virat@123"
+                        sh "docker pull sraahul/file:1.0"
+                        sh "docker rm -f trail1"
+                        sh "docker run -d -p 8082:8080 --name trail1 sraahul/file:1.0"
+                  }
+            }
+      }
+      }
