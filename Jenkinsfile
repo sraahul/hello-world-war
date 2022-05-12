@@ -24,6 +24,8 @@ pipeline{
             stage('deploy'){
                   agent { label 'tomcat' }
                   steps{
+                        sh " sudo su -"
+                        sh "echo 'hi'"
                         sh "sudo docker login -u sraahul -p Rahul@123"
                         sh "sudo docker pull sraahul/file-1-0"
                         sh "sudo docker run -d -p 8082:8080 --name trail1 sraahul/file-1-0"
