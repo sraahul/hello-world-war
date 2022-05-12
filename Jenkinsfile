@@ -12,7 +12,7 @@ pipeline{
       sh "pwd"
       sh "ls"
       sh "cd hello-world-war"
-      sh "docker build -t sraahul/file-1-0 ."
+      sh "sudo docker build -t sraahul/file-1-0 ."
       }
       }
        stage('publish'){
