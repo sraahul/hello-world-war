@@ -9,24 +9,23 @@ pipeline{
                   }
       stage('build'){
       steps{
-      sh "pwd"
-      sh "ls"
       sh "cd hello-world-war"
-      sh "sudo docker build -t sraahul/file-1-0 ."
+      sh "docker build -t sraahul/file-1-0:${BUILD_NUMBER} ."
       }
       }
        stage('publish'){
                   steps{
-                        sh "sudo docker login -u sraahul -p Rahul@123"
-                        sh "sudo docker push sraahul/file-1-0"
+                        sh "docker login -u sraahul -p Rahul@123"
+                        sh "docker push sraahul/file-1-0:${BUILD_NUMBER}"
                   }
             }
             stage('deploy'){
                   agent { label 'tomcat' }
                   steps{
-                        sh "sudo docker login -u sraahul -p Rahul@123"
-                        sh "sudo docker pull sraahul/file-1-0"
-                        sh "sudo docker run -d -p 8082:8080 --name trail1 sraahul/file-1-0"
+                        sh "docker login -u sraahul -p Rahul@123"
+                        sh "docker pull sraahul/file-1-0:${BUILD_NUMBER}"
+                        sh "docker rm -f trail1"
+                        sh "docker run -d -p 8082:8080 --name trail1 sraahul/file-1-0:${BUILD_NUMBER}"
                   }
             }
       }
