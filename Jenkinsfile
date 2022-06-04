@@ -1,5 +1,5 @@
 pipeline {
-  agent {label 'newslave'}
+  agent {label 'tomcat'}
   stages {
     stage ('checkout') {
       steps {
