@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deploy_name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector: 
+    matchLabels:
+      app: {{ .Values.label_name }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.maxsurge }}
+      maxUnavailable: {{ .Values.maxunavailable }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.label_name }}
+    spec:
+      containers:
+      - name: {{ .Values.container_name }}
+        image: "{{ .Values.image_name }}:{{ .Values.image_tag }}" 
+        resources:
+          limits:
+            cpu: "1"
+            memory: 256Mi
+          requests:
+            cpu: 500m
+            memory: 128Mi

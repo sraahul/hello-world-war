@@ -1,0 +1,8 @@
+deploy_name: mytomcat
+replicas: 4
+label_name: mytomcat
+maxsurge: 2
+maxunavailabel: 0
+container_name: tomcat
+image_name: sraahul/file-1-0
+image_tag: 
