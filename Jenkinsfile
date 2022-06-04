@@ -22,7 +22,7 @@ pipeline {
               sh 'pwd'
               sh 'ls'
               sh "helm package --version ${BUILD_NUMBER} helm/mytomcat/ "
-              sh "curl -rinsane15@gmail.com:Rahul@123 -T mytomcat-${BUILD_NUMBER}.tgz \"https://srahul.jfrog.io/artifactory/mytomcat-helm/mytomcat-${BUILD_NUMBER}.tgz\""
+              sh "curl -urinsane15@gmail.com:Rahul@123 -T mytomcat-${BUILD_NUMBER}.tgz \"https://srahul.jfrog.io/artifactory/mytomcat-helm/mytomcat-${BUILD_NUMBER}.tgz\""
       }
     }
       
